@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if flag_to_show_data == 'yes' %}
+<style>
+#wrapper {
+  display: flex;
+}
+
+#left {
+  flex: 0 0 65%;
+}
+
+#right {
+  flex: 1;
+}
+</style>
+<h1 class="text-info">Analysis View</h1>
+
+
+<div id="wrapper">
+  <div id="left"><div id="piechart"></div></div>
+  <div id="right"><div id="barchartcontainer"></div></div>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+var dataFromRequest={{ data_pie|tojson }}
+
+var category={};
+var count={};
+
+var i;
+var j;
+var showPieData=[];
+for (i = 0; i < dataFromRequest.length; i++) {
+	count[i]=dataFromRequest[i][1];
+	category[i]=dataFromRequest[i][0];
+	showPieData[i]=[category[i], count[i]];
+}
+
+  var dataOfPie = google.visualization.arrayToDataTable(showPieData);
+
+  // Optional; add a title and set the width and height of the chart
+  var optionsPieChart = { title: 'Overall Failure Category','width':800, 'height':800};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var piechart = new google.visualization.PieChart(document.getElementById('piechart'));
+  piechart.draw(dataOfPie, optionsPieChart);
+	
+
+///////////////////////// bar graph /////////////////////////////
+
+var dataBarChart = {{ data_bar|tojson }}
+
+var dataOfBar = google.visualization.arrayToDataTable(dataBarChart);
+
+var optionsBarChart = {title: 'Teamwise failure Category','width':1000, 'height':700, isStacked:true};
+
+var barchart = new google.visualization.BarChart(document.getElementById('barchartcontainer'));
+
+barchart.draw(dataOfBar, optionsBarChart);
+}
+</script>
+{% else %}
+<h4>Background processing is running at this moment. Please wait for some time or contact your admin.</h4>
+{% endif %}
+{% endblock content %}

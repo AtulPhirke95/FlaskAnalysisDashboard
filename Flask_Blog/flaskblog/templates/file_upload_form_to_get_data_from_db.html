@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+.center {
+  margin: auto;
+  width: 45%;
+  padding: 10px;
+}
+</style>
+<div>
+<div class="center content-section container justify-content-center">
+    <div class="container justify-content-center">
+<b><big class="container justify-content-center text-info">Please choose file to generate json_data: </big></b>
+    <form action = "/uploadfileforjsongeneration" method = "post" enctype="multipart/form-data">  
+        <input type="file" accept=".xlsx" name="file" />  
+        <input class="btn btn-outline-info" type = "submit" value="Upload and generate">  
+    </form>
+<small class="text-muted">
+   		<a class="ml-2" href="{{ url_for('backendpredictions') }}">Back</a>
+   	</small>
+</div>
+</div>
+{% endblock content %}

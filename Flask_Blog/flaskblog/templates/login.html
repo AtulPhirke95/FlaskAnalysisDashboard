@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+.center {
+  margin: auto;
+  width: 40%;
+  padding: 10px;
+}
+</style>
+<div>
+<div class="center content-section container justify-content-center">
+    <div class="container justify-content-center">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Log In</legend>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+	    <div class="form-group">
+	        <!--<small class="text-muted ml-2">
+                	<a href="{{ url_for('reset_password', email="email") }}">Forgot Password?</a>
+            	</small>-->
+		<small class="text-muted">
+            Forgot password?<a class="ml-2" >Please connect with Admin to reset the password.</a>
+        </small>
+	    </div>		
+        </form>
+    </div>
+</div>
+</div>
+    <div class="col-lg-4 col-md-4 col-sm-4 container justify-content-center">
+        <small class="text-muted">
+            Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+        </small>
+    </div>
+{% endblock content %}

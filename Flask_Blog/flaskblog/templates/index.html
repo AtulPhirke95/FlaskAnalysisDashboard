@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block content %}
+<html>
+	<head>
+		<title>{{t}}</title>
+		<!-- href="/static/assets/style.css"-->
+		<link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='assets/style.css')}}" >
+		<link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='assets/emoji.css')}}" >
+		<script src="{{ url_for('static',filename='assets/twemoji.min.js')}}"></script>  
+		<script src="{{ url_for('static',filename='assets/emoji.js')}}"></script>
+	</head>
+<body>
+	<h1>{{ h }}</h1>
+	<ul>
+		<li><a href="/list" class="{{ a1 }}">ALL</a></li>
+		<li><a href="/completed" class="{{ a3 }}">Completed</a></li>
+	</ul>
+	<hr>
+	{% if todos[0] %}
+	<div span="right">
+	<form action="/search"	method="GET" >
+		<table class="none" id="close">
+		<tr>
+		<td></td><td></td>
+		<td><big><b>Search Reference:</b></big></td>
+		<td><select name="refer" required>
+			<option value="Team">Team</option>
+			<option value="TestSetID">TestSetID</option>
+			<option value="Tester">Tester</option>
+			<option value="FailureCategory">FailureCategory</option>
+			<option value="FirstPrediction">First Prediction</option>
+			<option value="SecondPrediction">Second Prediction</option>
+		</select></td>
+		<td><input type="text" name="key" placeholder="Search Task" size="15" /></td>
+		<td><button type="submit">Search</button></td>
+		</tr>
+		</table>
+	</form>
+	</div>
+	<div span="right">
+	<form action="/logout">
+		<td><button type="submit">Logout</button></td>
+  	</form>
+
+	</div>
+	<b><big>Failure Data :</big></b>
+	<table>
+	    <tr id="row">
+		<th class="status">Status</th>
+	    	<th class="Team">Team</th>
+	    	<th class="TestSetID">TestSetID</th>
+	    	<th class="Execution Date">Execution Date</th>
+	    	<th class="Tester">Tester</th>
+	    	<th class="FailedStep">FailedStep</th>
+		<th class="FailedLog">FailedLog</th>
+		<th class="FailureCategory">FailureCategory</th>
+		<th class="First Prediction">Prediction 1</th>
+		<th class="Second Prediction">Prediction 2</th>			
+		<th class="func2">Modify</th>
+	    </tr>
+	{% for todo in todos %}
+		<tr class="datas">
+			<td><a href="./done?_id={{ todo['_id'] }}"><input type="image" src="static/images/{{todo['done']}}.png" alt="Submit ME"></a></td>
+			<td class="Team">{{ todo["Team"] }}</td>
+			<td class="TestSetID">{{ todo["TestSetID"] }}</td>
+			<td class="ExecutionDate">{{ todo["ExecutionDate"] }}</td>
+			<td class="Tester">{{ todo["Tester"] }}</td>
+			<td class="FailedStep">{{ todo["FailedStep"] }}</td>
+			<td class="FailedLog">{{ todo["FailedLog"] }}</td>
+			<td class="FailureCategory">{{ todo["FailureCategory"] }}</td>
+			<td class="First Prediction">{{ todo["First Prediction"] }}</td>
+			<td class="Second Prediction">{{ todo["Second Prediction"] }}</td>
+			<td class="func1"><a href="./update?_id={{ todo['_id'] }}"><button type="submit">EDIT</button></a></td>
+		</tr>
+	{% endfor %}
+	</table>
+	{% else %}
+		<h4>No Tasks in the List !!</h4>
+	{% endif %}
+	<hr/>
+	<script>
+
+	</script>
+</body>
+</html>

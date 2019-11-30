@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+	<form action="/update_admin_action1/{{task}}" method="POST">
+	<fieldset class="form-group">
+
+<select name="credential" class="btn btn-secondary dropdown-toggle" required>
+			<option value="Email">Email</option>
+			<option value="Password">Password</option>
+		</select></td>
+	<button type="submit" class="btn btn-outline-success"> Update </button>
+	</form>
+</div>
+{% endblock content %}

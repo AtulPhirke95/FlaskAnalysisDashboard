@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+	<form action="/action3/{{task}}" method="POST">
+	<fieldset class="form-group">
+
+<select name="category" class="btn btn-secondary dropdown-toggle" required>
+			<option value="Design Update">Design Update</option>
+			<option value="Functional Defect">Function Defect</option>
+			<option value="Data Issue">Data Issue</option>
+			<option value="Functional Change">Functional Change</option>
+			<option value="Technical Issue">Technical Issue</option>
+			<option value="Environment Issue">Environment Issue</option>
+			<option value="Infrastructure Issue">Infrastructure Issue</option>
+		</select></td>
+
+
+	<button type="submit" class="btn btn-outline-success"> Update Category </button>
+
+	</form>
+</div>
+{% endblock content %}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+<style type="text/css">
+            	.filterable {
+    			margin-top: 15px;
+		}
+		.filterable .panel-heading .pull-right {
+    			margin-top: -20px;
+		}
+		.filterable .filters input[disabled] {
+    			background-color: transparent;
+    			border: none;
+    			cursor: auto;
+    			box-shadow: none;
+    			padding: 0;
+    			height: auto;
+		}
+		.filterable .filters input[disabled]::-webkit-input-placeholder {
+    			color: #333;
+		}
+		.filterable .filters input[disabled]::-moz-placeholder {
+    			color: #333;
+		}
+		.filterable .filters input[disabled]:-ms-input-placeholder {
+    			color: #333;
+		}
+
+    </style>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	
+
+    {% if title %}
+        <title>Failure Analysis Tool - {{ title }}</title>
+    {% else %}
+        <title>Failure Analysis Tool</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar fixed-top navbar-expand-sm bg-info navbar-dark ">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{{ url_for('home') }}">Failure Analysis Tool</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              	<a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+		<a class="nav-item nav-link" href="{{ url_for('completed') }}">Recently Updated</a>
+              	<a class="nav-item nav-link" href="{{ url_for('analysis_view') }}">Analysis View</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+  
+	<li class="nav-item dropdown">
+	<div class="btn-group">
+	<button type="button" class="btn navbar-toggler-icon" data-toggle="dropdown">
+	</button>
+
+
+      <div class="dropdown-menu">
+	{% if current_user.is_authenticated %}
+		{% if request.path == '/home' or request.path == '/completed' or  request.path == '/analysisview' or request.path == '/account' %}
+			<!--<a class="font-weight-bold dropdown-item ">{{ current_user.username }}</a>-->
+			<a class="font-weight-bold dropdown-item" href="{{ url_for('account') }}">{{ current_user.username }}</a>
+			<a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+		{% elif request.path == '/login' or request.path == '/register' or request.path == '/admin' %}
+                	<a class="dropdown-item" href="{{ url_for('login') }}">Login</a>
+                	<a class="dropdown-item" href="{{ url_for('register') }}">Register</a>
+		{% else %}
+                	<a class="dropdown-item" href="{{ url_for('admin') }}">Logout</a>		
+		{% endif %}
+        {% elif request.path == '/login' or request.path == '/register' or request.path == '/admin'%}
+                <a class="dropdown-item" href="{{ url_for('login') }}">Login</a>
+                <a class="dropdown-item" href="{{ url_for('register') }}">Register</a>
+	{% else %}
+                <a class="dropdown-item" href="{{ url_for('admin') }}">Logout</a>
+	{% endif %}
+      </div>
+</div>
+    </li>
+
+              		
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container-fluid">
+      <div class="row">
+        <div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %}
+        </div>
+
+      </div>
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

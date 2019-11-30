@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %} 
+<style>
+.center {
+  border:none;
+  margin: auto;
+  width: 35%;
+  padding: 10px;
+}
+</style>
+<div>
+<div class="center content-section container justify-content-center">
+    <div class="container justify-content-center">
+<b><big class="container justify-content-center text-info">Backend Predictions Generator: </big></b>
+	<form action="/jsondatapreparation" method="POST">
+		<fieldset class="container justify-content-center form-group">
+			<label class="text-info">
+			<button type="submit" class="btn btn-outline-info"> json_data_prep </button>
+		</fieldset>
+	</form>
+
+	<form action="/datasegregator" method="POST">
+		<fieldset class="container justify-content-center form-group">
+			<label class="text-info">
+			<button type="submit" class="btn btn-outline-info"> data_segregator </button>
+		</fieldset>
+	</form>
+
+	<form action="/predictionsgenerator" method="POST">
+		<fieldset class="container justify-content-center form-group">
+			<label class="text-info">
+			<button type="submit" class="btn btn-outline-info"> Failure </button>
+		</fieldset>
+	</form>
+
+	<form action="/predictionsupdationtodb" method="POST">
+		<fieldset class="container justify-content-center form-group">
+			<label class="text-info">
+			<button type="submit" class="btn btn-outline-info"> data_updation </button>
+		</fieldset>
+	</form>
+</div>
+<small class="text-muted">
+   		<a class="ml-2" href="{{ url_for('dashboardview') }}">Back</a>
+   	</small>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+.center {
+  border: none;
+  margin: auto;
+  width: 45%;
+  padding: 10px;
+}
+</style>
+	<div>
+<div class="center content-section container justify-content-center">
+    <div class="container justify-content-center">
+	<p>Do you want to update the profile pic?</p>
+     	<a href="/updateprofilepic/yes"><input class="btn btn-outline-info" type='button' value='Yes' name='yes'> </a>
+	<a href="/updateprofilepic/no"><input class="btn btn-outline-info" type='button' value='no' name='no'> </a>
+   </div>
+
+</div>
+</div>
+{% endblock content %}

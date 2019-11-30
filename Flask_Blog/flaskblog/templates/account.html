@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+.center {
+  border: none;
+  margin: auto;
+  width: 45%;
+  padding: 10px;
+}
+</style>
+<div>
+<div class="center content-section container justify-content-center">
+    <div class="container justify-content-center">
+
+	<div class="media">
+        	<a href="{{ url_for('update_decision') }}"><input type="image" img class="rounded-circle account-img" src="/static/profile_pics/{{ image_path }}"></a>
+        	<div class="media-body">
+          	<h2 class="account-heading">{{ current_user.username }}</h2>
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock content %}

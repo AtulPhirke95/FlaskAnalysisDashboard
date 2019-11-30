@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+.center {
+  margin: auto;
+  width: 45%;
+  padding: 10px;
+}
+</style>
+<div>
+<div class="center content-section container justify-content-center">
+    <div class="container justify-content-center">
+<b><big class="container justify-content-center text-info">Please upload profile pic: </big></b>
+    <form action = "/uploadprofilepictoserver" method = "post" enctype="multipart/form-data">  
+        <input type="file" name="file" />  
+        <input class="btn btn-outline-info" type = "submit" value="Upload">  
+    </form>
+<small class="text-muted">
+   		<a class="ml-2" href="{{ url_for('account') }}">Back</a>
+   	</small>
+</div>
+</div>
+{% endblock content %}
